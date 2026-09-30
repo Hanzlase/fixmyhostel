@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report a Maintenance Issue — FixMyHostel</title>
+  <meta name="description" content="Submit a hostel repair complaint for electrical, plumbing, internet, or mess issues. Upload photo evidence and receive instant ticket confirmation.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="site-wrapper">
+    <!-- ======================================================================
+         NAVIGATION BAR
+         ====================================================================== -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-custom" aria-label="Main Navigation">
+        <div class="container">
+          <a class="brand-wrapper" href="/">
+            <div class="brand-symbol" aria-hidden="true">
+              <i class="bi bi-wrench-adjustable"></i>
+            </div>
+            <div class="brand-text-group">
+              <span class="brand-title">FixMy<span>Hostel</span></span>
+              <span class="brand-subtitle">Campus Maintenance</span>
+            </div>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#fixMyHostelNav" aria-controls="fixMyHostelNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="fixMyHostelNav">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/complaint">Report Issue</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/#how-it-works">How It Works</a>
+              </li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-3">
+              <span class="badge rounded-pill bg-light text-dark border px-3 py-2 d-none d-md-inline-flex align-items-center gap-1 font-monospace">
+                <i class="bi bi-person-circle text-success" aria-hidden="true"></i>
+                <span>Resident Portal</span>
+              </span>
+              <a href="/login" class="btn-custom-cancel py-1 px-3 fs-6">
+                <i class="bi bi-box-arrow-left" aria-hidden="true"></i>
+                <span>Sign Out</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <!-- Page Header -->
+      <div class="complaint-page-header">
+        <div class="d-inline-flex align-items-center gap-2 hero-pill mb-2">
+          <span class="hero-pill-indicator" aria-hidden="true"></span>
+          <span>New Maintenance Ticket</span>
+        </div>
+        <h1 class="hero-heading fs-2 mb-2">Report a Maintenance Issue</h1>
+        <p class="hero-subtext mb-0">
+          Provide your room details and problem description. Campus technicians will be alerted to schedule your repair.
+        </p>
+      </div>
+
+      <!-- Main Form & Tips Grid -->
+      <div class="row g-4 pb-5">
+        <!-- Form Column -->
+        <div class="col-lg-8">
+          <div class="complaint-card">
+            <div class="complaint-card-header d-flex justify-content-between align-items-center">
+              <div>
+                <h2 class="complaint-title">Complaint Details</h2>
+                <p class="complaint-desc">Please complete all required fields for priority assignment.</p>
+              </div>
+              <span class="badge bg-light text-secondary border font-monospace">Form 102</span>
+            </div>
+
+            <!-- Validation Alert Banner (Shown dynamically on error) -->
+            <div class="alert alert-danger d-none py-2 px-3 mb-4 d-flex align-items-center gap-2" id="complaintValidationAlert" role="alert">
+              <i class="bi bi-exclamation-triangle-fill fs-5" aria-hidden="true"></i>
+              <div>
+                <strong>Please check required fields:</strong> Ensure your room number and a clear description are provided.
+              </div>
+            </div>
+
+            <form id="complaintForm" novalidate>
+              <!-- 1. Category Field -->
+              <div class="form-group-custom">
+                <label for="complaintCategory" class="form-label-custom">
+                  Complaint Category <span class="text-danger">*</span>
+                </label>
+                <select id="complaintCategory" name="complaintCategory" class="select-custom" required>
+                  <option value="" selected disabled>Select a category</option>
+                  <option value="Electrical">Electrical</option>
+                  <option value="Plumbing">Plumbing</option>
+                  <option value="Internet">Internet</option>
+                  <option value="Mess">Mess</option>
+                  <option value="Other">Other</option>
+                </select>
+                <div class="field-error-message">
+                  <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+                  <span>Please select a valid complaint category.</span>
+                </div>
+              </div>
+
+              <!-- 2. Room Number Field -->
+              <div class="form-group-custom">
+                <label for="roomNumber" class="form-label-custom">
+                  Room Number <span class="text-danger">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="roomNumber" 
+                  name="roomNumber" 
+                  class="input-custom" 
+                  placeholder="e.g. 304, B-12, or Block C - Room 205" 
+                  required>
+                <div class="field-error-message">
+                  <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+                  <span>Room number is required for the repair technician.</span>
+                </div>
+              </div>
+
+              <!-- 3. Description Field with Live 0/250 Character Counter -->
+              <div class="form-group-custom">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <label for="complaintDescription" class="form-label-custom mb-0">
+                    Description <span class="text-danger">*</span>
+                  </label>
+                </div>
+                <textarea 
+                  id="complaintDescription" 
+                  name="complaintDescription" 
+                  class="textarea-custom" 
+                  rows="4" 
+                  maxlength="250" 
+                  placeholder="Describe the issue in detail (e.g. ceiling fan vibrating loudly on speed 3, water leaking under sink tap)..." 
+                  required></textarea>
+                <div class="counter-wrapper">
+                  <div class="field-error-message mb-0">
+                    <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+                    <span>Please enter a brief description of the issue.</span>
+                  </div>
+                  <!-- Required Live Character Counter -->
+                  <div class="char-counter ms-auto" id="charCounter" aria-live="polite">
+                    0/250 characters
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4. Photographic Evidence Upload Field -->
+              <div class="form-group-custom">
+                <label class="form-label-custom">
+                  Photographic Evidence <span class="text-muted fw-normal">(Optional but recommended)</span>
+                </label>
+                
+                <div class="file-upload-zone" id="evidenceDropzone" tabindex="0" role="button" aria-label="Upload photo evidence">
+                  <input 
+                    type="file" 
+                    id="complaintEvidence" 
+                    name="complaintEvidence" 
+                    accept="image/*"
+                    aria-label="Select photographic evidence">
+                  
+                  <div class="upload-icon-circle" aria-hidden="true">
+                    <i class="bi bi-camera"></i>
+                  </div>
+                  <div class="upload-primary-text">
+                    Upload a photo of the issue
+                  </div>
+                  <p class="upload-sub-text">
+                    Drag and drop or click to browse &bull; PNG, JPG, or WEBP up to 5MB
+                  </p>
+                </div>
+
+                <!-- Dynamic Filename / Feedback Pill -->
+                <div class="evidence-feedback-pill" id="evidenceFeedback">
+                  <div class="file-meta-group">
+                    <i class="bi bi-image" aria-hidden="true"></i>
+                    <span class="file-name-text" id="evidenceFileName">image.jpg</span>
+                  </div>
+                  <button type="button" class="btn-remove-evidence" id="btnRemoveEvidence" aria-label="Remove uploaded image" title="Remove image">
+                    <i class="bi bi-x-circle-fill"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Action Buttons: Submit & Cancel -->
+              <div class="d-flex flex-wrap align-items-center gap-3 pt-3 border-top mt-4">
+                <button type="submit" class="btn-custom-primary" id="submitComplaintBtn">
+                  <i class="bi bi-send-fill" aria-hidden="true"></i>
+                  <span>Submit Complaint</span>
+                </button>
+                <button type="button" class="btn-custom-cancel" id="cancelComplaintBtn">
+                  <i class="bi bi-x-circle" aria-hidden="true"></i>
+                  <span>Cancel</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Sidebar / Tips Column -->
+        <div class="col-lg-4">
+          <aside class="complaint-tips-card" aria-label="Reporting Guidelines">
+            <div class="tips-header">
+              <i class="bi bi-lightbulb-fill" aria-hidden="true"></i>
+              <span>Helpful Reporting Tips</span>
+            </div>
+
+            <div class="tip-item">
+              <span class="tip-number">1</span>
+              <div>
+                <strong>Be specific about location</strong>
+                <p class="text-muted small mb-0">Specify block letter, floor, and room number (e.g. Block B, Room 304).</p>
+              </div>
+            </div>
+
+            <div class="tip-item">
+              <span class="tip-number">2</span>
+              <div>
+                <strong>Clear photos expedite repairs</strong>
+                <p class="text-muted small mb-0">Technicians can bring the right diameter pipe or bulb wattage before visiting.</p>
+              </div>
+            </div>
+
+            <div class="tip-item">
+              <span class="tip-number">3</span>
+              <div>
+                <strong>Emergency issues</strong>
+                <p class="text-muted small mb-0">For severe water bursts or sparking wires, immediately notify your ground-floor warden desk.</p>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top">
+              <div class="d-flex align-items-center gap-2 text-muted small font-monospace">
+                <i class="bi bi-clock-history text-success"></i>
+                <span>Caretaker desk active: 08:00 &ndash; 20:00</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <!-- ======================================================================
+         SUCCESS CONFIRMATION MODAL (BOOTSTRAP 5)
+         ====================================================================== -->
+    <div class="modal fade custom-modal" id="complaintSuccessModal" tabindex="-1" aria-labelledby="modalHeading" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+          <div class="modal-body p-0">
+            <!-- Green check emblem -->
+            <div class="modal-success-emblem" aria-hidden="true">
+              <i class="bi bi-check-lg"></i>
+            </div>
+
+            <!-- Required Exact Title -->
+            <h2 class="modal-custom-title" id="modalHeading">
+              Complaint Submitted Successfully
+            </h2>
+
+            <p class="modal-custom-desc">
+              Your complaint has been recorded for this prototype. Hostel maintenance staff have been simulated to receive your dispatch request.
+            </p>
+
+            <!-- Ticket details summary -->
+            <div class="modal-ticket-box">
+              <span class="ticket-tag-title">Tracking Reference</span>
+              <span class="ticket-id" id="ticketDisplayId">FMH-ELE-4821</span>
+            </div>
+
+            <!-- Done Action Button -->
+            <button type="button" class="btn-custom-primary w-100 py-2" data-bs-dismiss="modal" id="modalDoneBtn">
+              <span>Done</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         FOOTER
+         ====================================================================== -->
+    <footer class="footer-custom">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="d-flex align-items-center gap-2">
+            <span class="brand-title fs-6">FixMy<span>Hostel</span></span>
+            <span class="text-muted">&bull;</span>
+            <span>&copy; 2026 FixMyHostel. All rights reserved.</span>
+          </div>
+          <div class="footer-badges">
+            <span class="footer-badge-item">
+              <i class="bi bi-check-circle-fill text-success" aria-hidden="true"></i>
+              <span>Complaint Queue Online</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Bootstrap 5 Bundle JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Prototype JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

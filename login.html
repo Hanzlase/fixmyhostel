@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login — FixMyHostel</title>
+  <meta name="description" content="Sign in to your FixMyHostel student resident portal to submit complaints, view repair status, and contact hostel maintenance.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="site-wrapper">
+    <!-- ======================================================================
+         NAVIGATION BAR
+         ====================================================================== -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-custom" aria-label="Main Navigation">
+        <div class="container">
+          <a class="brand-wrapper" href="/">
+            <div class="brand-symbol" aria-hidden="true">
+              <i class="bi bi-wrench-adjustable"></i>
+            </div>
+            <div class="brand-text-group">
+              <span class="brand-title">FixMy<span>Hostel</span></span>
+              <span class="brand-subtitle">Campus Maintenance</span>
+            </div>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#fixMyHostelNav" aria-controls="fixMyHostelNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="fixMyHostelNav">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/#how-it-works">How It Works</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/#benefits">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/login">Student Login</a>
+              </li>
+            </ul>
+
+            <div class="d-flex align-items-center">
+              <a href="/" class="btn-custom-secondary py-2 px-3 fs-6">
+                <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                <span>Back to Home</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="login-page-wrapper">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-10">
+            <div class="login-container-card">
+              <div class="row g-0">
+                <!-- ==========================================================
+                     LEFT/TOP: BRAND & ARCHITECTURAL VISUAL PANEL
+                     ========================================================== -->
+                <div class="col-lg-5">
+                  <div class="login-visual-panel">
+                    <div>
+                      <div class="login-brand-eyebrow">
+                        <i class="bi bi-stars" aria-hidden="true"></i>
+                        <span>Resident Services</span>
+                      </div>
+                      <h2 class="login-visual-title">
+                        Welcome back to your hostel hub.
+                      </h2>
+                      <p class="login-visual-p">
+                        Report repairs with ease and keep tabs on technicians assigned to your room.
+                      </p>
+
+                      <!-- Maintenance Checklist Graphic -->
+                      <div class="checklist-widget">
+                        <div class="checklist-header">
+                          <span>CAMPUS DISPATCH PROTOCOL</span>
+                          <span>ACTIVE</span>
+                        </div>
+                        <div class="checklist-item">
+                          <i class="bi bi-check-circle-fill checklist-icon-done" aria-hidden="true"></i>
+                          <span>Direct caretaker notifications</span>
+                        </div>
+                        <div class="checklist-item">
+                          <i class="bi bi-check-circle-fill checklist-icon-done" aria-hidden="true"></i>
+                          <span>Photo evidence verification</span>
+                        </div>
+                        <div class="checklist-item">
+                          <i class="bi bi-clock-fill checklist-icon-active" aria-hidden="true"></i>
+                          <span>Average room response: 4h</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="login-visual-footer">
+                      <i class="bi bi-shield-check" aria-hidden="true"></i>
+                      <span>Authorized Student Access Portal</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ==========================================================
+                     RIGHT/BOTTOM: STUDENT LOGIN FORM
+                     ========================================================== -->
+                <div class="col-lg-7">
+                  <div class="login-form-panel">
+                    <div class="login-role-badge">
+                      <i class="bi bi-mortarboard-fill" aria-hidden="true"></i>
+                      <span>Student Resident Authentication</span>
+                    </div>
+
+                    <h1 class="login-header-title">Student Login</h1>
+                    <p class="login-header-subtitle">
+                      Sign in using your university student ID or registered email to log a maintenance ticket.
+                    </p>
+
+                    <!-- Feedback Alert (Shown on empty credentials) -->
+                    <div class="alert alert-danger d-none py-2 px-3 mb-3 small" id="loginErrorBanner" role="alert"></div>
+
+                    <form id="studentLoginForm" novalidate>
+                      <!-- Student ID / Email Field -->
+                      <div class="form-group-custom">
+                        <label for="studentId" class="form-label-custom">
+                          Student ID or Campus Email
+                        </label>
+                        <input 
+                          type="text" 
+                          id="studentId" 
+                          name="studentId" 
+                          class="input-custom" 
+                          placeholder="e.g. resident@campus.edu or 2024-HSTL-108" 
+                          required 
+                          autocomplete="username"
+                          aria-describedby="studentIdHelp">
+                        <div class="field-error-message">
+                          <i class="bi bi-exclamation-triangle" aria-hidden="true"></i>
+                          <span>Please provide your student ID or email.</span>
+                        </div>
+                      </div>
+
+                      <!-- Password Field with Embedded Eye Toggle -->
+                      <div class="form-group-custom">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                          <label for="studentPassword" class="form-label-custom mb-0">
+                            Password
+                          </label>
+                        </div>
+                        <div class="password-field-wrapper">
+                          <input 
+                            type="password" 
+                            id="studentPassword" 
+                            name="studentPassword" 
+                            class="input-custom" 
+                            placeholder="Enter your student password" 
+                            required 
+                            autocomplete="current-password"
+                            aria-describedby="passwordHelp">
+                          <button 
+                            type="button" 
+                            id="togglePasswordBtn" 
+                            class="btn-password-toggle" 
+                            aria-label="Show password" 
+                            title="Toggle password visibility">
+                            <i class="bi bi-eye" aria-hidden="true"></i>
+                          </button>
+                        </div>
+                        <div class="field-error-message">
+                          <i class="bi bi-exclamation-triangle" aria-hidden="true"></i>
+                          <span>Password is required.</span>
+                        </div>
+                      </div>
+
+                      <!-- Submit Button -->
+                      <div class="d-grid mt-4">
+                        <button type="submit" class="btn-custom-primary py-3" id="loginSubmitBtn">
+                          <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i>
+                          <span>Sign In to Dashboard</span>
+                        </button>
+                      </div>
+                    </form>
+
+                    <!-- Prototype Notice -->
+                    <div class="login-demo-hint">
+                      <i class="bi bi-info-circle-fill text-muted mt-1" aria-hidden="true"></i>
+                      <span>
+                        <strong>Prototype Notice:</strong> This is a frontend demonstration. Enter any credentials to proceed directly to the complaint reporting interface.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ======================================================================
+         FOOTER
+         ====================================================================== -->
+    <footer class="footer-custom">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="d-flex align-items-center gap-2">
+            <span class="brand-title fs-6">FixMy<span>Hostel</span></span>
+            <span class="text-muted">&bull;</span>
+            <span>&copy; 2026 FixMyHostel. All rights reserved.</span>
+          </div>
+          <div class="footer-badges">
+            <span class="footer-badge-item">
+              <i class="bi bi-shield-check" aria-hidden="true"></i>
+              <span>SSL Protected Prototype</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Bootstrap 5 Bundle JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Prototype JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
